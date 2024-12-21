@@ -1,6 +1,6 @@
 # AutomatedTesting Project
 
-This project is designed to automate the testing of the login page for the website `https://www.saucedemo.com/`. The automation framework uses [Playwright](https://playwright.dev/) for browser-based testing, ensuring that all functionalities of the login page work as expected.
+This project is designed to automate the testing of the website `https://www.saucedemo.com/`. The automation framework uses [Playwright](https://playwright.dev/) for browser-based testing, ensuring that all functionalities work as expected.
 
 ## Features
 - Automated navigation to the login page.
@@ -27,28 +27,16 @@ Before running the project, ensure you have the following installed:
 2. Install dependencies:
    ```bash
    npm install
+      # or
+   pnpm install
    # or
    yarn install
    ```
 
 3. Ensure Playwright browsers are installed:
    ```bash
-   npx playwright install
+   pnpm playwright install
    ```
-
-## Project Structure
-
-- **/constants/**
-    - `test-case-name.constants.ts`: Stores descriptive names for test cases.
-
-- **/pages/**
-    - `loginPage.ts`: Contains methods for interacting with the login page, such as navigating, filling fields, and validating messages.
-
-- **/resources/**
-    - `user.ts`: Stores user credentials like `StandardUser` and `LockedOutUser`.
-
-- **tests/**
-    - Contains Playwright test files.
 
 ## Running Tests
 
@@ -56,17 +44,22 @@ To run tests, use the following commands:
 
 1. Run all tests:
    ```bash
-   npx playwright test
+   pnpm exece playwright test
    ```
 
 2. Run a specific test:
    ```bash
-   npx playwright test <test-file-name>
+   pnpm exece playwright test <test-file-name>
    ```
 
 3. Run tests in headed mode:
    ```bash
-   npx playwright test --headed
+   pnpm exece playwright test --headed
+   ```
+
+4. To open last HTML report run:
+   ```bash
+    pnpm exec playwright show-report
    ```
 
 ## ESLint Integration
@@ -77,12 +70,12 @@ This project uses [ESLint](https://eslint.org/) to maintain clean and consistent
 
 - Run ESLint:
   ```bash
-  npx eslint .
+  pnpm eslint .
   ```
 
 - Fix linting issues:
   ```bash
-  npx eslint . --fix
+  pnpm eslint . --fix
   ```
 
 ## Writing Tests
@@ -91,7 +84,6 @@ To create new tests:
 
 1. Add a test case name in `test-case-name.constants.ts`.
 2. Create a new test in the appropriate file under `tests/`.
-3. Use methods from `loginPage.ts` to interact with the login page.
 
 ### Example Test
 
@@ -123,8 +115,3 @@ test(loginTestCaseName.TC007, async ({ loginPage }) => {
    git push origin feature/<your-feature-name>
    ```
 5. Create a Pull Request.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
