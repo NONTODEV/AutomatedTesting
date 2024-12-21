@@ -29,7 +29,7 @@ Before running the project, ensure you have the following installed:
    npm install
       # or
    pnpm install
-   # or
+      # or
    yarn install
    ```
 
@@ -61,22 +61,6 @@ To run tests, use the following commands:
    ```bash
     pnpm exec playwright show-report
    ```
-
-## ESLint Integration
-
-This project uses [ESLint](https://eslint.org/) to maintain clean and consistent code formatting. Code is automatically formatted according to the rules when saved in supported editors.
-
-### Linting Commands
-
-- Run ESLint:
-  ```bash
-  pnpm eslint .
-  ```
-
-- Fix linting issues:
-  ```bash
-  pnpm eslint . --fix
-  ```
 
 ## Writing Tests
 
