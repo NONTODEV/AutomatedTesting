@@ -7,9 +7,12 @@ export enum loginTestCaseName {
   TC006 = 'TC-006 = Should logged in fails with an error message when using invalid credentials'
 }
 
-export enum loginLocator {
-  username = '#user-name',
-  password = '#password',
-  loginBtn = '#login-button',
-  errorMessage = '[data-test="error"]',
+export enum productTestCaseName {
+  TC007 = 'TC-007 = Adding all available products to the cart and then removing them, verifying that the cart updates correctly',
+  TC008 = 'TC-008 = Product should correctly sorts items from A to Z',
+  TC009 = 'TC-009 = Product should correctly sorts items from Z to A',
+  TC010 = 'TC-010 = Product should correctly sorts items from price low to high',
+  TC011 = 'TC-011 = Product should correctly sorts items from price high to low',
+  TC012 = 'TC-012 = Should navigate to the cart page when clicking the cart icon'
 }
+

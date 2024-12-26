@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
-import { loginLocator } from '../constans/test-case-name.constants'
 import { removeSlashUrl } from '../utils'
+import { loginLocator } from '../constans/locator.constants'
 
 export class LoginPage {
   private page: Page
@@ -10,28 +10,28 @@ export class LoginPage {
     this.page = page
   }
 
-  async goto() {
+  async goto(): Promise<void> {
     await this.page.goto(this.loginPageUrl)
   }
 
-  async fillUserNameAndPassword(username: string, password: string) {
+  async fillUserNameAndPassword(username: string, password: string): Promise<void> {
     await this.page.locator(loginLocator.username).fill(username)
     await this.page.locator(loginLocator.password).fill(password)
   }
 
-  async clickLogin() {
+  async clickLogin(): Promise<void> {
     await this.page.click(loginLocator.loginBtn)
   }
 
-  async getUsername() {
+  async getUsername(): Promise<string> {
     return await this.page.locator(loginLocator.username).inputValue()
   }
 
-  async getUserPassword() {
+  async getUserPassword(): Promise<string> {
     return await this.page.locator(loginLocator.password).inputValue()
   }
 
-  async getErrorMessage() {
+  async getErrorMessage(): Promise<string> {
     try {
       return await this.page.locator(loginLocator.errorMessage).textContent({ timeout: 1000 }) || ''
     } catch (e) {
@@ -39,7 +39,7 @@ export class LoginPage {
     return ''
   }
 
-  isValidUrl() {
+  async isValidUrl(): Promise<boolean> {
     const url = removeSlashUrl(this.page.url())
     return url === this.loginPageUrl
   }

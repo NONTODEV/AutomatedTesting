@@ -21,7 +21,7 @@ test(loginTestCaseName.TC002, async ({ loginPage }) => {
   const message = await loginPage.getErrorMessage()
 
   expect(message).toContain('Username is required')
-  expect(loginPage.isValidUrl()).toBe(true)
+  expect(await loginPage.isValidUrl()).toBe(true)
 })
 
 test(loginTestCaseName.TC003, async ({ loginPage }) => {
@@ -31,7 +31,7 @@ test(loginTestCaseName.TC003, async ({ loginPage }) => {
   const message = await loginPage.getErrorMessage()
 
   expect(message).toContain('Password is required')
-  expect(loginPage.isValidUrl()).toBe(true)
+  expect(await loginPage.isValidUrl()).toBe(true)
 })
 
 test(loginTestCaseName.TC004, async ({ loginPage }) => {
@@ -41,7 +41,7 @@ test(loginTestCaseName.TC004, async ({ loginPage }) => {
   const message = await loginPage.getErrorMessage()
 
   expect(message).toContain('is required')
-  expect(loginPage.isValidUrl()).toBe(true)
+  expect(await loginPage.isValidUrl()).toBe(true)
 })
 
 test(loginTestCaseName.TC005, async ({ loginPage }) => {
@@ -51,7 +51,7 @@ test(loginTestCaseName.TC005, async ({ loginPage }) => {
   const message = await loginPage.getErrorMessage()
 
   expect(message).not.toContain('is required')
-  expect(loginPage.isValidUrl()).toBe(false)
+  expect(await loginPage.isValidUrl()).toBe(false)
 })
 
 test(loginTestCaseName.TC006, async ({ loginPage }) => {
@@ -61,5 +61,5 @@ test(loginTestCaseName.TC006, async ({ loginPage }) => {
   const message = await loginPage.getErrorMessage()
 
   expect(message).toContain('this user has been locked out.')
-  expect(loginPage.isValidUrl()).toBe(true)
+  expect(await loginPage.isValidUrl()).toBe(true)
 })
