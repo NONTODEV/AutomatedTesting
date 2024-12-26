@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
 import { removeSlashUrl } from '../utils'
-import { loginLocator } from '../constans/locator.constants'
+import { loginLocator } from '../enum/locator.enum'
 
 export class LoginPage {
   private page: Page

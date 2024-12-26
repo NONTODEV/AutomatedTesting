@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test'
-import { loginTestCaseName } from '../constans/test-case-name.constants'
+import { loginTestCaseName } from '../enum/test-case-name.enum'
 import { test } from '../pages/page'
 import { LockedOutUser, StandardUser } from '../resources/user'
 

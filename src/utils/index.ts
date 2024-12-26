@@ -1,4 +1,4 @@
-import { sortProduct } from '../constans/locator.constants'
+import { sortProduct } from '../enum/locator.enum'
 
 export const removeSlashUrl = (url: string): string => {
   let newURL = url

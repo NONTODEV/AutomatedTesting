@@ -1,7 +1,7 @@
 import { test } from '../pages/page'
-import { productTestCaseName } from '../constans/test-case-name.constants'
+import { productTestCaseName } from '../enum/test-case-name.enum'
 import { expect } from '@playwright/test'
-import { productLocator, sortProduct } from '../constans/locator.constants'
+import { productLocator, sortProduct } from '../enum/locator.enum'
 import { StandardUser } from '../resources/user'
 import { sortNames, sortPrices } from '../utils'
 

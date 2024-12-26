@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test'
-import { productLocator, sortProduct } from '../constans/locator.constants'
+import { productLocator, sortProduct } from '../enum/locator.enum'
 
 export class ProductPage {
   private page: Page

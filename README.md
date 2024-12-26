@@ -66,7 +66,7 @@ To run tests, use the following commands:
 
 To create new tests:
 
-1. Add a test case name in `test-case-name.constants.ts`.
+1. Add a test case name in `test-case-name.enum.ts`.
 2. Create a new test in the appropriate file under `tests/`.
 
 ### Example Test
