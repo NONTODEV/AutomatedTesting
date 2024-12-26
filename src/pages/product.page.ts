@@ -37,10 +37,25 @@ export class ProductPage {
       const prices = await this.page.locator(productLocator.getProductPrice).allTextContents() || []
       return prices.map(price => parseFloat(price.replace('$', '')))
     } catch (e) {
-      console.error('Error fetching product prices:', e)
+      console.error('Error getProductPrice:', e)
     }
     return []
   }
+
+  async getProducts(): Promise<{ name: string; price: number }[]> {
+    try {
+      const names = await this.getProductNames()
+      const prices = await this.getProductPrice()
+      return names.map((name, index) => ({
+        name: name.trim(),
+        price: prices[index],
+      }))
+    } catch (e) {
+      console.error('Error getProductPrice:', e)
+    }
+    return []
+  }
+
 
   async getCart(): Promise<string> {
     try {
@@ -49,6 +64,16 @@ export class ProductPage {
       console.error('Error getCart:', e)
     }
     return ''
+  }
+
+  async getAmountCart(): Promise<number> {
+    try {
+      const amount = await this.page.locator(productLocator.cartAmount).textContent()
+      return (parseInt(amount))
+    } catch (e) {
+      console.error('Error getAmountCart:', e)
+    }
+    return
   }
 
   async sortProduct(option: sortProduct): Promise<string[]> {

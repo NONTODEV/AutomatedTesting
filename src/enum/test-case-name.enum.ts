@@ -16,3 +16,11 @@ export enum productTestCaseName {
   TC012 = 'TC-012 = Should navigate to the cart page when clicking the cart icon'
 }
 
+export enum cartTestCaseName {
+  TC013 = 'TC-013 = The cart badge should displays the correct number of items currently in the cart',
+  TC014 = 'TC-014 = The item name and price in the cart should match the selection from the product page',
+  TC015 = 'TC-015 = Should remove the selected item from the cart and update the cart badge',
+  TC016 = 'TC-016 = When clicking "Continue Shopping", should navigates back to the product page',
+  TC017 = 'TC-017 = When clicking "Checkout", should proceed to the checkout information page',
+}
+

@@ -33,11 +33,13 @@ export class LoginPage {
 
   async getErrorMessage(): Promise<string> {
     try {
-      return await this.page.locator(loginLocator.errorMessage).textContent({ timeout: 1000 }) || ''
+      return (await this.page.locator(loginLocator.errorMessage).textContent({ timeout: 1000 })) || ''
     } catch (e) {
+      console.error('Failed to retrieve error message:', e)
+      return ''
     }
-    return ''
   }
+
 
   async isValidUrl(): Promise<boolean> {
     const url = removeSlashUrl(this.page.url())

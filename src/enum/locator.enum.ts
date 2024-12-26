@@ -9,6 +9,7 @@ export enum productLocator {
   addBackpack = '#add-to-cart-sauce-labs-backpack',
   addBikeLight = '#add-to-cart-sauce-labs-bike-light',
   addTShirt = '#add-to-cart-sauce-labs-bolt-t-shirt',
+  addSauceLabsOnesie = '#add-to-cart-sauce-labs-onesie',
   removeBackpack = '#remove-sauce-labs-backpack',
   removeBikeLight = '#remove-sauce-labs-bike-light',
   removeTShirt = '#remove-sauce-labs-bolt-t-shirt',
@@ -17,6 +18,16 @@ export enum productLocator {
   getProductPrice = '[data-test="inventory-item-price"]',
   sortProductBtn = '[data-test="product-sort-container"]',
   cartBtn = '[data-test="shopping-cart-link"]',
+}
+
+export enum cartLocator {
+  inventoryItem = '[data-test="inventory-item"]',
+  inventoryName = '[data-test="inventory-item-name"]',
+  inventoryPrice = '[data-test="inventory-item-price"]',
+  removeBackpackInventory = '[data-test="remove-sauce-labs-backpack"]',
+  removeBikeLightInventory = '[data-test="remove-sauce-labs-bike-light"]',
+  continueShoppingBtn = '[data-test="continue-shopping"]',
+  checkOutBtn = '[data-test="checkout"]',
 }
 
 export enum sortProduct {

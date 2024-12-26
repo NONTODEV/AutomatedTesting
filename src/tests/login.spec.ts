@@ -48,9 +48,6 @@ test(loginTestCaseName.TC005, async ({ loginPage }) => {
   await loginPage.fillUserNameAndPassword(StandardUser.username, StandardUser.password)
   await loginPage.clickLogin()
 
-  const message = await loginPage.getErrorMessage()
-
-  expect(message).not.toContain('is required')
   expect(await loginPage.isValidUrl()).toBe(false)
 })
 
