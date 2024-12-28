@@ -1,16 +1,21 @@
 import { Page } from '@playwright/test'
 import { productLocator, sortProduct } from '../enum/locator.enum'
+import { PageURL } from '../enum/url.enum'
+import { removeSlashUrl } from '../utils'
 
 export class ProductPage {
   private page: Page
-  productPageUrl = 'https://www.saucedemo.com/inventory.html'
 
   constructor(page: Page) {
     this.page = page
   }
 
+  async getPageUrl(): Promise<string> {
+    return removeSlashUrl(this.page.url())
+  }
+
   async goto(): Promise<void> {
-    await this.page.goto(this.productPageUrl)
+    await this.page.goto(PageURL.productPageUrl)
   }
 
   async clickAddOrRemoveProducts(products: string[]) {
@@ -56,7 +61,6 @@ export class ProductPage {
     return []
   }
 
-
   async getCart(): Promise<string> {
     try {
       return await this.page.locator(productLocator.cartAmount).textContent({ timeout: 1000 })
@@ -83,10 +87,5 @@ export class ProductPage {
       console.error('Error sortProduct:', e)
     }
     return []
-  }
-
-  async isValidUrl(expectedUrl: string): Promise<boolean> {
-    const url = this.page.url()
-    return url === expectedUrl
   }
 }

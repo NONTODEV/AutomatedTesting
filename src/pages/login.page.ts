@@ -1,17 +1,21 @@
 import { Page } from '@playwright/test'
-import { removeSlashUrl } from '../utils'
 import { loginLocator } from '../enum/locator.enum'
+import { PageURL } from '../enum/url.enum'
+import { removeSlashUrl } from '../utils'
 
 export class LoginPage {
   private page: Page
-  loginPageUrl = 'https://www.saucedemo.com'
 
   constructor(page: Page) {
     this.page = page
   }
 
+  async getPageUrl(): Promise<string> {
+    return removeSlashUrl(this.page.url())
+  }
+
   async goto(): Promise<void> {
-    await this.page.goto(this.loginPageUrl)
+    await this.page.goto(PageURL.loginPageUrl)
   }
 
   async fillUserNameAndPassword(username: string, password: string): Promise<void> {
@@ -38,11 +42,5 @@ export class LoginPage {
       console.error('Failed to retrieve error message:', e)
       return ''
     }
-  }
-
-
-  async isValidUrl(): Promise<boolean> {
-    const url = removeSlashUrl(this.page.url())
-    return url === this.loginPageUrl
   }
 }

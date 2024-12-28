@@ -21,3 +21,13 @@ export const ErrorUser =
     username: 'error_user',
     password: 'secret_sauce',
   }
+
+export const userInformation = {
+  username: 'JsonDotDot',
+  password: 'secret_sauce',
+  firstName: 'Emily',
+  lastName: 'Harrison',
+  postalCode: '43210',
+}
+
+export const EmptyInfo = ''

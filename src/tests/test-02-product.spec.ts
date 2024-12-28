@@ -1,21 +1,16 @@
 import { test } from '../pages/page'
-import { productTestCaseName } from '../enum/test-case-name.enum'
 import { expect } from '@playwright/test'
 import { productLocator, sortProduct } from '../enum/locator.enum'
-import { StandardUser } from '../resources/user'
-import { sortNames, sortPrices } from '../utils'
+import { isValidUrl, sortNames, sortPrices } from '../utils'
+import { PageURL } from '../enum/url.enum'
+import { setupTest } from '../utils/setup'
 
 test.beforeEach(async ({ loginPage, productPage }) => {
-  //Perform login before each test
-  await loginPage.goto()
-  await loginPage.fillUserNameAndPassword(StandardUser.username, StandardUser.password)
-  await loginPage.clickLogin()
-
-  // Navigate to the product page after logging in
-  await productPage.goto()
+  //Login and navigate to product page
+  await setupTest(loginPage, productPage)
 })
 
-test(productTestCaseName.TC007, async ({ productPage }) => {
+test('TC-007 = Adding all available products to the cart and then removing them, verifying that the cart updates correctly', async ({ productPage }) => {
   // test function add products
   const productsToAdd = [
     productLocator.addBackpack,
@@ -38,7 +33,7 @@ test(productTestCaseName.TC007, async ({ productPage }) => {
   expect(removeProductInCart).toContain('1') //  check has 1 product in carts
 })
 
-test(productTestCaseName.TC008, async ({ productPage }) => {
+test('TC-008 = Product should correctly sorts items from A to Z', async ({ productPage }) => {
   await productPage.sortProduct(sortProduct.nameAZ)
   const productNames = await productPage.getProductNames()
 
@@ -47,7 +42,7 @@ test(productTestCaseName.TC008, async ({ productPage }) => {
   expect(productNames).toEqual(sortedNames)
 })
 
-test(productTestCaseName.TC009, async ({ productPage }) => {
+test('TC-009 = Product should correctly sorts items from Z to A', async ({ productPage }) => {
   await productPage.sortProduct(sortProduct.nameZA)
   const productNames = await productPage.getProductNames()
 
@@ -56,7 +51,7 @@ test(productTestCaseName.TC009, async ({ productPage }) => {
   expect(productNames).toEqual(sortedNames)
 })
 
-test(productTestCaseName.TC010, async ({ productPage }) => {
+test('TC-010 = Product should correctly sorts items from price low to high', async ({ productPage }) => {
   await productPage.sortProduct(sortProduct.priceLH)
   const productPrice = await productPage.getProductPrice()
 
@@ -65,7 +60,7 @@ test(productTestCaseName.TC010, async ({ productPage }) => {
   expect(productPrice).toEqual(sortedPrice)
 })
 
-test(productTestCaseName.TC011, async ({ productPage }) => {
+test('TC-011 = Product should correctly sorts items from price high to low', async ({ productPage }) => {
   await productPage.sortProduct(sortProduct.priceHL)
   const productPrice = await productPage.getProductPrice()
 
@@ -74,7 +69,10 @@ test(productTestCaseName.TC011, async ({ productPage }) => {
   expect(productPrice).toEqual(sortedPrice)
 })
 
-test(productTestCaseName.TC012, async ({ productPage ,cartPage}) => {
+test('TC-012 = Should navigate to the cart page when clicking the cart icon', async ({ productPage }) => {
   await productPage.clickCart()
-  expect(await productPage.isValidUrl(cartPage.cartPageUrl)).toBe(true)
+
+  const currentUrl = await productPage.getPageUrl()
+
+  expect(await isValidUrl(currentUrl, PageURL.cartPageUrl)).toBe(true)
 })
