@@ -2,9 +2,9 @@ import { test } from '../pages/page'
 import { userInformation } from '../resources/user'
 import { productLocator } from '../enum/locator.enum'
 import { expect } from '@playwright/test'
-import { PageURL } from '../enum/url.enum'
 import { isValidUrl } from '../utils'
 import { setupTest } from '../utils/setup'
+import { productPageUrl } from '../constants/url.constants'
 
 test.beforeEach(async ({ loginPage, productPage, cartPage, checkOutInformationPage, checkOutOverViewPage }) => {
   //Login and navigate to product page
@@ -47,5 +47,5 @@ test('TC-028 = Display message', async ({ checkOutCompletePage }) => {
 test('TC-029 = When clicking "Back Home", should navigate back to the product page', async ({ checkOutCompletePage }) => {
   await checkOutCompletePage.clickBackToHomePage()
 
-  expect(await isValidUrl(await checkOutCompletePage.getPageUrl(), PageURL.productPageUrl)).toBe(true)
+  expect(await isValidUrl(await checkOutCompletePage.getPageUrl(), productPageUrl)).toBe(true)
 })

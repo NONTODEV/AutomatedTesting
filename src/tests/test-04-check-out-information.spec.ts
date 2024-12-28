@@ -1,11 +1,11 @@
 import { test } from '../pages/page'
 import { EmptyInfo, userInformation } from '../resources/user'
 import { expect } from '@playwright/test'
-import { ErrorEnum } from '../enum/error.enum'
-import { PageURL } from '../enum/url.enum'
 import { isValidUrl } from '../utils'
 import { setupTest } from '../utils/setup'
 import { productLocator } from '../enum/locator.enum'
+import { cartPageUrl, checkOutInformationPageUrl, checkOutOverViewPageUrl } from '../constants/url.constants'
+import { firstNameRequired, lastNameRequired, postalCodeRequired } from '../constants/error.constants'
 
 test.beforeEach(async ({ loginPage, productPage, cartPage }) => {
   //Login and navigate to product page
@@ -26,7 +26,7 @@ test.beforeEach(async ({ loginPage, productPage, cartPage }) => {
 
 test('TC-018 = When clicking "Cancel", should navigate back to the cart page', async ({ checkOutInformationPage }) => {
   await checkOutInformationPage.clickCancelBtn()
-  expect(await isValidUrl(await checkOutInformationPage.getPageUrl(), PageURL.cartPageUrl)).toBe(true)
+  expect(await isValidUrl(await checkOutInformationPage.getPageUrl(), cartPageUrl)).toBe(true)
 })
 
 test('TC-019 = When clicking "Continue" without any client information, should display an error message', async ({ checkOutInformationPage }) => {
@@ -35,8 +35,8 @@ test('TC-019 = When clicking "Continue" without any client information, should d
 
   const message = await checkOutInformationPage.getErrorMessage()
 
-  expect(message).toContain(ErrorEnum.firstNameRequired)
-  expect(await isValidUrl(await checkOutInformationPage.getPageUrl(), PageURL.checkOutInformationPageUrl)).toBe(true)
+  expect(message).toContain(firstNameRequired)
+  expect(await isValidUrl(await checkOutInformationPage.getPageUrl(), checkOutInformationPageUrl)).toBe(true)
 })
 
 test('TC-020 = When clicking "Continue" with some client information, should display an error message', async ({ checkOutInformationPage }) => {
@@ -45,16 +45,16 @@ test('TC-020 = When clicking "Continue" with some client information, should dis
   await checkOutInformationPage.clickContinueBtn()
 
   //should throw message error Last Name is required
-  expect(await checkOutInformationPage.getErrorMessage()).toContain(ErrorEnum.lastNameRequired)
+  expect(await checkOutInformationPage.getErrorMessage()).toContain(lastNameRequired)
 
   //test fill firstname and lastname
   await checkOutInformationPage.fillInformation(userInformation.firstName, userInformation.lastName, EmptyInfo)
   await checkOutInformationPage.clickContinueBtn()
 
   //should throw message error Postal Code is required
-  expect(await checkOutInformationPage.getErrorMessage()).toContain(ErrorEnum.postalCodeRequired)
+  expect(await checkOutInformationPage.getErrorMessage()).toContain(postalCodeRequired)
 
-  expect(await isValidUrl(await checkOutInformationPage.getPageUrl(), PageURL.checkOutInformationPageUrl)).toBe(true)
+  expect(await isValidUrl(await checkOutInformationPage.getPageUrl(), checkOutInformationPageUrl)).toBe(true)
 })
 
 test('TC-021 = When clicking "Continue" with all client information, should proceed to the checkout overview page', async ({ checkOutInformationPage }) => {
@@ -64,5 +64,5 @@ test('TC-021 = When clicking "Continue" with all client information, should proc
     userInformation.postalCode,
   )
   await checkOutInformationPage.clickContinueBtn()
-  expect(await isValidUrl(await checkOutInformationPage.getPageUrl(), PageURL.checkOutOverViewPageUrl)).toBe(true)
+  expect(await isValidUrl(await checkOutInformationPage.getPageUrl(), checkOutOverViewPageUrl)).toBe(true)
 })

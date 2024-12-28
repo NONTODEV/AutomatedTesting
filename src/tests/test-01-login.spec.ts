@@ -1,9 +1,9 @@
 import { expect } from '@playwright/test'
 import { test } from '../pages/page'
 import { EmptyInfo, LockedOutUser, StandardUser, userInformation } from '../resources/user'
-import { ErrorEnum } from '../enum/error.enum'
 import { isValidUrl } from '../utils'
-import { PageURL } from '../enum/url.enum'
+import { loginPageUrl, productPageUrl } from '../constants/url.constants'
+import { passwordRequired, required, userLockedOut, usernameRequired } from '../constants/error.constants'
 
 test.beforeEach(async ({ loginPage }) => {
   await loginPage.goto()
@@ -22,8 +22,8 @@ test('TC-002 = Should show an error message if log in without a username', async
   await loginPage.clickLogin()
   const message = await loginPage.getErrorMessage()
 
-  expect(message).toContain(ErrorEnum.usernameRequired)
-  expect(await isValidUrl(await loginPage.getPageUrl(), PageURL.loginPageUrl)).toBe(true)
+  expect(message).toContain(usernameRequired)
+  expect(await isValidUrl(await loginPage.getPageUrl(), loginPageUrl)).toBe(true)
 })
 
 test('TC-003 = Should show an error message if log in without a password', async ({ loginPage }) => {
@@ -32,8 +32,8 @@ test('TC-003 = Should show an error message if log in without a password', async
   await loginPage.clickLogin()
   const message = await loginPage.getErrorMessage()
 
-  expect(message).toContain(ErrorEnum.passwordRequired)
-  expect(await isValidUrl(await loginPage.getPageUrl(), PageURL.loginPageUrl)).toBe(true)
+  expect(message).toContain(passwordRequired)
+  expect(await isValidUrl(await loginPage.getPageUrl(), loginPageUrl)).toBe(true)
 })
 
 test('TC-004 = Should show an error message if log in with both fields blank', async ({ loginPage }) => {
@@ -42,15 +42,15 @@ test('TC-004 = Should show an error message if log in with both fields blank', a
   await loginPage.clickLogin()
   const message = await loginPage.getErrorMessage()
 
-  expect(message).toContain(ErrorEnum.required)
-  expect(await isValidUrl(await loginPage.getPageUrl(), PageURL.loginPageUrl)).toBe(true)
+  expect(message).toContain(required)
+  expect(await isValidUrl(await loginPage.getPageUrl(), loginPageUrl)).toBe(true)
 })
 
 test('TC-005 = Should logged in successfully with valid credentials', async ({ loginPage }) => {
   await loginPage.fillUserNameAndPassword(StandardUser.username, StandardUser.password)
   await loginPage.clickLogin()
 
-  expect(await isValidUrl(await loginPage.getPageUrl(), PageURL.productPageUrl)).toBe(true)
+  expect(await isValidUrl(await loginPage.getPageUrl(), productPageUrl)).toBe(true)
 })
 
 test('TC-006 = Should logged in fails with an error message when using invalid credentials', async ({ loginPage }) => {
@@ -59,6 +59,6 @@ test('TC-006 = Should logged in fails with an error message when using invalid c
 
   const message = await loginPage.getErrorMessage()
 
-  expect(message).toContain(ErrorEnum.userLockedOut)
-  expect(await isValidUrl(await loginPage.getPageUrl(), PageURL.loginPageUrl)).toBe(true)
+  expect(message).toContain(userLockedOut)
+  expect(await isValidUrl(await loginPage.getPageUrl(), loginPageUrl)).toBe(true)
 })

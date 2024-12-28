@@ -1,9 +1,9 @@
 import { test } from '../pages/page'
 import { cartLocator, productLocator } from '../enum/locator.enum'
 import { expect } from '@playwright/test'
-import { PageURL } from '../enum/url.enum'
 import { isValidUrl } from '../utils'
 import { setupTest } from '../utils/setup'
+import { checkOutInformationPageUrl, productPageUrl } from '../constants/url.constants'
 
 test.beforeEach(async ({ loginPage, productPage }) => {
   //Login and navigate to product page
@@ -21,7 +21,10 @@ test.beforeEach(async ({ loginPage, productPage }) => {
   await productPage.clickCart()
 })
 
-test('TC-013 = The cart badge should displays the correct number of items currently in the cart', async ({ productPage, cartPage }) => {
+test('TC-013 = The cart badge should displays the correct number of items currently in the cart', async ({
+                                                                                                           productPage,
+                                                                                                           cartPage,
+                                                                                                         }) => {
 
   const amountProductInCart = await productPage.getAmountCart()
   const amountInventoryItem = await cartPage.getAmountInventoryItem()
@@ -29,7 +32,10 @@ test('TC-013 = The cart badge should displays the correct number of items curren
   expect(amountProductInCart).toEqual(amountInventoryItem)
 })
 
-test('TC-014 = The item name and price in the cart should match the selection from the product page', async ({ productPage, cartPage }) => {
+test('TC-014 = The item name and price in the cart should match the selection from the product page', async ({
+                                                                                                               productPage,
+                                                                                                               cartPage,
+                                                                                                             }) => {
 
   const products = await productPage.getProducts()
   const inventoryItem = await cartPage.getInventoryItem()
@@ -61,10 +67,10 @@ test('TC-015 = Should remove the selected item from the cart and update the cart
 
 test('TC-016 = When clicking "Continue Shopping", should navigates back to the product page', async ({ cartPage }) => {
   await cartPage.clickContinueShoppingBtn()
-  expect(await isValidUrl(await cartPage.getPageUrl(), PageURL.productPageUrl)).toBe(true)
+  expect(await isValidUrl(await cartPage.getPageUrl(), productPageUrl)).toBe(true)
 })
 
 test('TC-017 = When clicking "Checkout", should proceed to the checkout information page', async ({ cartPage }) => {
   await cartPage.clickCheckOutBtn()
-  expect(await isValidUrl(await cartPage.getPageUrl(), PageURL.checkOutInformationPageUrl)).toBe(true)
+  expect(await isValidUrl(await cartPage.getPageUrl(), checkOutInformationPageUrl)).toBe(true)
 })

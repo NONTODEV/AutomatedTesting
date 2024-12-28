@@ -2,8 +2,8 @@ import { test } from '../pages/page'
 import { expect } from '@playwright/test'
 import { productLocator, sortProduct } from '../enum/locator.enum'
 import { isValidUrl, sortNames, sortPrices } from '../utils'
-import { PageURL } from '../enum/url.enum'
 import { setupTest } from '../utils/setup'
+import { cartPageUrl } from '../constants/url.constants'
 
 test.beforeEach(async ({ loginPage, productPage }) => {
   //Login and navigate to product page
@@ -74,5 +74,5 @@ test('TC-012 = Should navigate to the cart page when clicking the cart icon', as
 
   const currentUrl = await productPage.getPageUrl()
 
-  expect(await isValidUrl(currentUrl, PageURL.cartPageUrl)).toBe(true)
+  expect(await isValidUrl(currentUrl, cartPageUrl)).toBe(true)
 })

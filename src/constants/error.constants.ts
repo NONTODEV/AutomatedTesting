@@ -1,0 +1,7 @@
+export const usernameRequired = 'Username is required'
+export const passwordRequired = 'Password is required'
+export const required = 'is required'
+export const userLockedOut = 'this user has been locked out.'
+export const firstNameRequired = 'First Name is required'
+export const lastNameRequired = 'Last Name is required'
+export const postalCodeRequired = 'Postal Code is required'

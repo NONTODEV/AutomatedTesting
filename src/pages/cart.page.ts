@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test'
 import { cartLocator } from '../enum/locator.enum'
-import { PageURL } from '../enum/url.enum'
 import { removeSlashUrl } from '../utils'
+import { cartPageUrl } from '../constants/url.constants'
 
 export class CartPage {
   private page: Page
@@ -15,7 +15,7 @@ export class CartPage {
   }
 
   async goto(): Promise<void> {
-    await this.page.goto(PageURL.cartPageUrl)
+    await this.page.goto(cartPageUrl)
   }
 
   async getAmountInventoryItem(): Promise<number> {

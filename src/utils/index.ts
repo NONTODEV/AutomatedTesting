@@ -1,5 +1,12 @@
 import { sortProduct } from '../enum/locator.enum'
-import { PageURL } from '../enum/url.enum'
+import {
+  cartPageUrl,
+  checkOutCompletePageUrl,
+  checkOutInformationPageUrl,
+  checkOutOverViewPageUrl,
+  loginPageUrl,
+  productPageUrl,
+} from '../constants/url.constants'
 
 export const removeSlashUrl = (url: string): string => {
   let newURL = url
@@ -37,18 +44,18 @@ export const calculateTotal = (subTotal: number, tex: number): number => {
 
 export const isValidUrl = async (page: string, expectedUrl: string): Promise<boolean> => {
   switch (expectedUrl) {
-    case PageURL.loginPageUrl:
-      return page === PageURL.loginPageUrl
-    case PageURL.productPageUrl:
-      return page === PageURL.productPageUrl
-    case PageURL.cartPageUrl:
-      return page === PageURL.cartPageUrl
-    case PageURL.checkOutInformationPageUrl:
-      return page === PageURL.checkOutInformationPageUrl
-    case PageURL.checkOutOverViewPageUrl:
-      return page === PageURL.checkOutOverViewPageUrl
-    case PageURL.checkOutCompletePageUrl:
-      return page === PageURL.checkOutCompletePageUrl
+    case loginPageUrl:
+      return page === loginPageUrl
+    case productPageUrl:
+      return page === productPageUrl
+    case cartPageUrl:
+      return page === cartPageUrl
+    case checkOutInformationPageUrl:
+      return page === checkOutInformationPageUrl
+    case checkOutOverViewPageUrl:
+      return page === checkOutOverViewPageUrl
+    case checkOutCompletePageUrl:
+      return page === checkOutCompletePageUrl
     default:
       return false
   }

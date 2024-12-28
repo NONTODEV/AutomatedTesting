@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test'
 import { loginLocator } from '../enum/locator.enum'
-import { PageURL } from '../enum/url.enum'
 import { removeSlashUrl } from '../utils'
+import { loginPageUrl } from '../constants/url.constants'
 
 export class LoginPage {
   private page: Page
@@ -15,7 +15,7 @@ export class LoginPage {
   }
 
   async goto(): Promise<void> {
-    await this.page.goto(PageURL.loginPageUrl)
+    await this.page.goto(loginPageUrl)
   }
 
   async fillUserNameAndPassword(username: string, password: string): Promise<void> {

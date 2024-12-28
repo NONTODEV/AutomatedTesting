@@ -1,10 +1,10 @@
 import { test } from '../pages/page'
 import { expect } from '@playwright/test'
-import { PageURL } from '../enum/url.enum'
 import { isValidUrl } from '../utils'
 import { setupTest } from '../utils/setup'
 import { productLocator } from '../enum/locator.enum'
 import { userInformation } from '../resources/user'
+import { checkOutCompletePageUrl, productPageUrl } from '../constants/url.constants'
 
 test.beforeEach(async ({ loginPage, productPage, cartPage, checkOutInformationPage }) => {
   //Login and navigate to product page
@@ -73,11 +73,11 @@ test('TC-024 = Should correctly calculate the total, tax, and grand total', asyn
 test('TC-025 = When clicking "Cancel", should navigate back to the product page', async ({ checkOutOverViewPage }) => {
   await checkOutOverViewPage.clickCancel()
 
-  expect(await isValidUrl(await checkOutOverViewPage.getPageUrl(), PageURL.productPageUrl)).toBe(true)
+  expect(await isValidUrl(await checkOutOverViewPage.getPageUrl(), productPageUrl)).toBe(true)
 })
 
 test('TC-026 = When clicking "Finish", should process to the checkout complete page', async ({ checkOutOverViewPage }) => {
   await checkOutOverViewPage.finishCancel()
 
-  expect(await isValidUrl(await checkOutOverViewPage.getPageUrl(), PageURL.checkOutCompletePageUrl)).toBe(true)
+  expect(await isValidUrl(await checkOutOverViewPage.getPageUrl(), checkOutCompletePageUrl)).toBe(true)
 })

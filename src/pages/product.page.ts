@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test'
 import { productLocator, sortProduct } from '../enum/locator.enum'
-import { PageURL } from '../enum/url.enum'
 import { removeSlashUrl } from '../utils'
+import { productPageUrl } from '../constants/url.constants'
 
 export class ProductPage {
   private page: Page
@@ -15,7 +15,7 @@ export class ProductPage {
   }
 
   async goto(): Promise<void> {
-    await this.page.goto(PageURL.productPageUrl)
+    await this.page.goto(productPageUrl)
   }
 
   async clickAddOrRemoveProducts(products: string[]) {
